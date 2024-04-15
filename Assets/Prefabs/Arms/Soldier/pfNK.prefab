@@ -351,7 +351,7 @@ GameObject:
   - component: {fileID: 2550344493404966046}
   - component: {fileID: 1499847188008296691}
   - component: {fileID: 3233280663150588056}
-  - component: {fileID: 8809624550802618521}
+  - component: {fileID: 1074192409467259347}
   - component: {fileID: 6376543740546092312}
   - component: {fileID: 1099889583808693374}
   m_Layer: 8
@@ -467,7 +467,7 @@ MonoBehaviour:
   lookForTargetType: 0
   turnAmend: -1
   lookDirection: {x: 0, y: 0}
---- !u!114 &8809624550802618521
+--- !u!114 &1074192409467259347
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -476,7 +476,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6420839838195514782}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb8480b0cc607449993bee18b1ada9f1, type: 3}
+  m_Script: {fileID: 11500000, guid: 0243e9d9a6e8f47a4b0256c757cd0973, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hitType: 1
