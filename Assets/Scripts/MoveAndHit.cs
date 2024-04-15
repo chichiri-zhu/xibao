@@ -1,0 +1,113 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public enum LookForTargetType
+{
+    All,
+    Soldier,
+    Building
+}
+
+public class MoveAndHit : MonoBehaviour
+{
+    protected SoldierBase soldier;
+    protected UnitBase targetUnit;
+    protected UnitBase hitTargetUnit;
+    protected float defaultFindRof = 3;
+    [SerializeField] protected LookForTargetType lookForTargetType = LookForTargetType.All;
+    public int turnAmend = 1;
+
+    public Vector2 lookDirection;
+
+    protected void Awake()
+    {
+        soldier = GetComponent<SoldierBase>();
+        OnAwake();
+    }
+
+    protected virtual void OnAwake()
+    {
+
+    }
+
+    protected void Start()
+    {
+        //targetUnit = GameManager.Instance.GetMainBuilding().GetComponent<UnitBase>();
+        OnStart();
+    }
+
+    protected virtual void OnStart()
+    {
+
+    }
+
+    protected void Update()
+    {
+        HandleFindTarget();
+        HandleMoveAndHit();
+    }
+
+    protected float lookForTargetTimer;
+    protected float lookForTargetTimerMax = .2f;
+    public void HandleFindTarget()
+    {
+        lookForTargetTimer -= Time.deltaTime;
+        if (lookForTargetTimer < 0)
+        {
+            lookForTargetTimer += lookForTargetTimerMax;
+            LookForTarget();
+        }
+    }
+
+    public virtual void LookForTarget()
+    {
+        if (targetUnit == null)
+        {
+            targetUnit = GameManager.Instance.GetMainBuilding()?.GetComponent<UnitBase>();
+        }
+    }
+
+    public virtual void HandleMoveAndHit()
+    {
+        if(targetUnit != null)
+        {
+            float distance = UtilsClass.ColliderDistance(targetUnit.transform.GetComponent<Collider2D>(), transform.GetComponent<Collider2D>());
+            lookDirection = targetUnit.transform.position - transform.position;
+            lookDirection.Normalize();
+
+            AttributeParam attributeParam = soldier.GetAttributeSystem().GetAttributeParam();
+            if (distance <= attributeParam.Rof)
+            {
+                //Hit
+                DoHit();
+            }
+            else
+            {
+                //Move
+                soldier.SetWalk();
+                Vector2 position = transform.position;
+                position = position + soldier.GetMoveSpeed() * lookDirection * Time.deltaTime;
+                transform.position = position;
+            }
+            Turn(lookDirection.x);
+        }
+    }
+
+    protected void DoHit()
+    {
+        hitTargetUnit = targetUnit;
+        soldier.DoHit(targetUnit);
+    }
+
+    public void Turn(float direction)
+    {
+        transform.localScale = new Vector3(Mathf.Sign(direction) * turnAmend, 1, 1);
+    }
+
+    public UnitBase GetTargetUnit()
+    {
+        return targetUnit;
+    }
+}
