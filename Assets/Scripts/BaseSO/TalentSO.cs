@@ -5,6 +5,12 @@ using UnityEditor;
 using System.Linq;
 using System;
 
+public enum TalentType
+{
+    Default,
+    Building
+}
+
 [CreateAssetMenu(menuName = "ScriptableObjects/Talent")]
 public class TalentSO : ScriptableObject
 {
@@ -12,6 +18,7 @@ public class TalentSO : ScriptableObject
     [TalentSelector]
     public string selectedTalent;
     public string content;
+    public TalentType type;
 }
 
 

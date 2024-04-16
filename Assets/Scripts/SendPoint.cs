@@ -100,6 +100,10 @@ public class SendPoint : MonoBehaviour
 
     private void ClearEnemys()
     {
+        if(enemyList == null)
+        {
+            return;
+        }
         foreach (Transform enemy in enemyList)
         {
             if (enemy != null)

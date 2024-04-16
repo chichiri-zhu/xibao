@@ -63,7 +63,8 @@ public class GenerativeCell : MonoBehaviour
 
     public void InitCell()
     {
-        if(soldierAmount > 0)
+        ClearSoldier();
+        if (soldierAmount > 0)
         {
             for (int i = 1; i <= soldierAmount; i++)
             {

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -119,7 +120,17 @@ public class BuildingPlace : MonoBehaviour
         //建造完成
         if(buildingType.talents != null && buildingType.talents.Count > 0)
         {
-            TalentChooseUI.Instance.Show(buildingType.talents, (TalentSO talent) => { BuildingManager.Instance.Build(buildingType, this); }, () => { CancelBuilding(); });
+            TalentChooseUI.Instance.Show(buildingType.talents, (TalentSO talent) => {
+                BuildingBase buildingBase = BuildingManager.Instance.Build(buildingType, this);
+                if (talent.type == TalentType.Building)
+                {
+                    Type talentType = Type.GetType(talent.selectedTalent);
+                    if (talentType != null)
+                    {
+                        buildingBase.transform.gameObject.AddComponent(talentType);
+                    }
+                }
+            }, () => { CancelBuilding(); });
         }
         else
         {

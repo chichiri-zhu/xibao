@@ -10,7 +10,7 @@ public class WhiteCellUpgradeTwo : UpgradeBase
         upgradeAmount = 8;
     }
 
-    public override IEnumerator UpgradeDone()
+    public override IEnumerator _DoUpgrade()
     {
         GenerativeCell generativeCell = transform.gameObject.GetComponent<GenerativeCell>();
         if (generativeCell == null)

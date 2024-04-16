@@ -6,15 +6,20 @@ using UnityEngine;
 public class WhiteCellUpgrade : UpgradeBase
 {
     [SerializeField] private List<TalentSO> upgradeTalentList = new List<TalentSO>();
-    public override IEnumerator UpgradeDone()
+    public override IEnumerator _DoUpgrade()
     {
         if (upgradeTalentList != null && upgradeTalentList.Count > 0)
         {
             yield return StartCoroutine(ShowTalentChooseUI(upgradeTalentList));
 
         }
-        transform.gameObject.AddComponent<WhiteCellUpgradeTwo>();
+        
         yield return null;
+    }
+
+    public override void UpgradeDone()
+    {
+        transform.gameObject.AddComponent<WhiteCellUpgradeTwo>();
     }
 
     private IEnumerator ShowTalentChooseUI(List<TalentSO> talentList)

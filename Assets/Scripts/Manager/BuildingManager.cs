@@ -14,7 +14,7 @@ public class BuildingManager : SingleBase<BuildingManager>
         buildingList = new List<BuildingBase>();
     }
 
-    public void Build(BuildingTypeSO buildingType, BuildingPlace buildingPlace)
+    public BuildingBase Build(BuildingTypeSO buildingType, BuildingPlace buildingPlace)
     {
         Transform buildingTransform = Instantiate(buildingType.prefab, buildingPlace.transform.position, Quaternion.identity);
         buildingTransform.SetParent(buildingTransform);
@@ -24,5 +24,6 @@ public class BuildingManager : SingleBase<BuildingManager>
             buildingList.Add(buildingBase);
         }
         OnBuildEnd?.Invoke(this, new OnBuildEndArgs { buildingPlace = buildingPlace });
+        return buildingBase;
     }
 }

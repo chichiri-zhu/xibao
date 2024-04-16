@@ -9,7 +9,7 @@ public class HeartUpgradeTwo : UpgradeBase
         upgradeAmount = 2;
     }
 
-    public override IEnumerator UpgradeDone()
+    public override IEnumerator _DoUpgrade()
     {
         HeartBuilding heartBuilding = building as HeartBuilding;
         List<TalentSO> upgradeTalentList = heartBuilding.upgradeTalentList;

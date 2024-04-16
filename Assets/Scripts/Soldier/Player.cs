@@ -64,8 +64,14 @@ public class Player : SoldierBase
 
     public void OnTriggerExit2D(Collider2D collision)
     {
-        triggerBuilding = null;
-        triggerPlace = null;
+        if (collision.gameObject.CompareTag("Building"))
+        {
+            triggerBuilding = null;
+        }
+        else if (collision.gameObject.CompareTag("Place"))
+        {
+            triggerPlace = null;
+        }
     }
 
     public bool IsOverPlace()

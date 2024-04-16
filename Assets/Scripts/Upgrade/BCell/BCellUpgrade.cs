@@ -5,7 +5,7 @@ using UnityEngine;
 public class BCellUpgrade : UpgradeBase
 {
     [SerializeField] private List<ArmsSO> armsUpgradeList;
-    public override IEnumerator UpgradeDone()
+    public override IEnumerator _DoUpgrade()
     {
         yield return null;
     }

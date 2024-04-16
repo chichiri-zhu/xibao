@@ -126,7 +126,7 @@ public class UpgradeBase : MonoBehaviour
         //升级完成
         isUpgradePaid = true;
         //upgradeIE = UpgradeDone();
-        yield return StartCoroutine(UpgradeDone());
+        yield return StartCoroutine(_DoUpgrade());
         //StartCoroutine(UpgradeDone());
         //bool result = true;// (bool)upgradeIE.Current;
         //Debug.Log("result:" + result);
@@ -137,6 +137,7 @@ public class UpgradeBase : MonoBehaviour
         if (talentChosen == TalentChosenEnum.done)
         {
             HideResource();
+            UpgradeDone();
             OnUpgradeDone?.Invoke(this, EventArgs.Empty);
             Destroy(this);
         }
@@ -148,9 +149,14 @@ public class UpgradeBase : MonoBehaviour
     }
 
     private IEnumerator upgradeIE;
-    public virtual IEnumerator UpgradeDone()
+    public virtual IEnumerator _DoUpgrade()
     {
         yield return true;
+    }
+
+    public virtual void UpgradeDone()
+    {
+
     }
 
     private void InitResources()
@@ -167,7 +173,7 @@ public class UpgradeBase : MonoBehaviour
         {
             return;
         }
-
+        Debug.Log("cancel");
         if (currentCoroutine != null)
         {
             StopCoroutine(currentCoroutine);

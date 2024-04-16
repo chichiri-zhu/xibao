@@ -9,7 +9,7 @@ public class RedBuildingUpgrade : UpgradeBase
     {
         upgradeAmount = 3;
     }
-    public override IEnumerator UpgradeDone()
+    public override IEnumerator _DoUpgrade()
     {
         Transform towerTwoTransform = AssetManager.Instance.buildingListSO.buildingList.FirstOrDefault(obj => obj.name == "RedBuildingTwo").prefab;
         Instantiate(towerTwoTransform, transform.position, Quaternion.identity);

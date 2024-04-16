@@ -33,7 +33,7 @@ public class HeartUpgradeOne : UpgradeBase
     //}
 
     
-    public override IEnumerator UpgradeDone()
+    public override IEnumerator _DoUpgrade()
     {
         HeartBuilding heartBuilding = building as HeartBuilding;
         List<TalentSO> upgradeTalentList = heartBuilding.upgradeTalentList;
