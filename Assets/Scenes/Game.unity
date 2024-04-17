@@ -1839,7 +1839,7 @@ PrefabInstance:
     - target: {fileID: 1812968771751846689, guid: c92e8bde4473d4b3bb0b8a541d120d2a, type: 3}
       propertyPath: buildingType
       value: 
-      objectReference: {fileID: 11400000, guid: f79eefdd97b5848d1a85e9fda88a75e9, type: 2}
+      objectReference: {fileID: 11400000, guid: 035ea07e7adc84063a03e1fff5107900, type: 2}
     - target: {fileID: 2327148527976328101, guid: c92e8bde4473d4b3bb0b8a541d120d2a, type: 3}
       propertyPath: m_Name
       value: pfPlace (1)

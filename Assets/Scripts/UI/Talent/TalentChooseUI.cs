@@ -35,7 +35,6 @@ public class TalentChooseUI : UIbase
         this.cancelCB = cancelCB;
         foreach (TalentSO talent in talentList)
         {
-            Debug.Log(talent);
             TalentChooseItem chooseItem = TalentChooseItem.Create(talent, itemTransform);
             chooseItem.OnChoose += ChooseItem_OnChoose;
         }
