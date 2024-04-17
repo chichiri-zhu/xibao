@@ -1,5 +1,5 @@
 ﻿<Properties StartupConfiguration="{BA10CE7F-396A-7AC1-E4BF-A00951247B22}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Test/NavTest.cs" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MoveAndHit.cs" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="e698a9b4-e1a4-4f54-bfab-e1ecb5851c9b" />
