@@ -10,6 +10,7 @@ public class HealthSystem : MonoBehaviour
     private int healthAmount;
     private bool isBuilding;
 
+    private SoldierBase soldierBase;
     private UnitBase unit;
 
     public event EventHandler<OnDamagedArgs> OnDamaged;
@@ -20,6 +21,7 @@ public class HealthSystem : MonoBehaviour
 
     private void Awake()
     {
+        soldierBase = GetComponent<SoldierBase>();
         unit = GetComponent<UnitBase>();
         BuildingBase buildingbase = GetComponent<BuildingBase>();
         if (buildingbase != null)
@@ -73,6 +75,29 @@ public class HealthSystem : MonoBehaviour
         _VerifyDead(sourceUnit);
     }
 
+    public void HpRecover(int amount, bool isPoint = true)
+    {
+        //float recoverEffectPercent = 0;
+        //float recoverExt = 0;
+        //if (fightAttributeSystem != null)
+        //{
+        //    recoverEffectPercent = fightAttributeSystem.GetFightAttributeAmount(FightAttributeType.RecoverEffectPercent);
+        //    recoverExt = fightAttributeSystem.GetFightAttributeAmount(FightAttributeType.RecoverExt);
+        //}
+
+        //amount += (int)(recoverEffectPercent / 100 * amount);
+        //amount += (int)recoverExt;
+
+        healthAmount += amount;
+        healthAmount = Mathf.Clamp(healthAmount, 0, healthAmountMax);
+        //if (isPoint)
+        //{
+        //    _RecoverPoint(amount);
+        //}
+
+        OnHpRecover?.Invoke(this, EventArgs.Empty);
+    }
+
     private void _FontPoint(int damageAmount, DamageRes damageRes = DamageRes.Default)
     {
         if (damageAmount <= 0 && damageRes != DamageRes.FullBlock)
@@ -108,6 +133,7 @@ public class HealthSystem : MonoBehaviour
 
     private void _DoDamage(int damageAmount)
     {
+        Debug.Log(gameObject + ":" + damageAmount);
         healthAmount -= damageAmount;
         healthAmount = Mathf.Clamp(healthAmount, 0, healthAmountMax);
     }
@@ -131,6 +157,15 @@ public class HealthSystem : MonoBehaviour
 
     public void Dead()
     {
+        if(soldierBase != null && soldierBase.GetSoldierStatus() == SoldierStatus.Death)
+        {
+            return;
+        }
         OnDied?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void Revive()
+    {
+        HpRecover(healthAmountMax);
     }
 }

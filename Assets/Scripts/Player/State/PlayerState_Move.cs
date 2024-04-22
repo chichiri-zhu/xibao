@@ -7,19 +7,15 @@ public class PlayerState_Move : PlayerState
     }
     public override void OnEnter()
     {
+        Debug.Log("Move begin");
         stateMachine.player.SetWalk();
     }
     public override void OnPhysicsUpdate()
     {
         //物理上，在这个状态，玩家不动，速度为0
         //stateMachine.playerController.SetVelocity(Vector2.zero);
-        Vector2 position = stateMachine.playerController.transform.position;
-        //position.x = position.x + speed * horizontal * Time.deltaTime;
-        //position.y = position.y + speed * vertical * Time.deltaTime;
-
-        position = position + stateMachine.player.GetMoveSpeed() * stateMachine.player.movePositionDir * Time.deltaTime;
-
-        //transform.position = position;
+        Vector3 position = stateMachine.playerController.transform.position;
+        position = position + stateMachine.player.GetMoveSpeed() * stateMachine.player.movePositionDir * Time.fixedDeltaTime;
         stateMachine.playerController.SetPosition(position);
     }
     public override void OnUpdate()

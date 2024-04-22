@@ -25,7 +25,8 @@ public class HitController : MonoBehaviour
         Collider2D[] collider2DArray = Physics2D.OverlapCircleAll(transform.position,  attributeParam.Rof, layerMask);
         if(collider2DArray.Length > 0)
         {
-            hitBase.DoHit();
+            //hitBase.DoHit();
+            player.DoHit(player.GetTargetUnit());
         }
     }
 }

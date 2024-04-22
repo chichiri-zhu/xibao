@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 8748623908648705096}
   - component: {fileID: 1383706740608641987}
   - component: {fileID: 8866729800906175945}
+  - component: {fileID: -6219723427846050186}
   m_Layer: 11
   m_Name: pfGuanzhuang
   m_TagString: Enemy
@@ -175,6 +176,7 @@ MonoBehaviour:
   soldier: {fileID: 11400000, guid: f39c9df9fb8e743f09070fa62c848872, type: 2}
   isMoving: 0
   animator: {fileID: 5461957966949939255}
+  navMeshAgent: {fileID: 0}
   enemyController: {fileID: 0}
 --- !u!70 &1514477423819855481
 CapsuleCollider2D:
@@ -302,6 +304,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitType: 0
+--- !u!195 &-6219723427846050186
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4743438904388592113}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 1
 --- !u!1001 &8349145958181565284
 PrefabInstance:
   m_ObjectHideFlags: 0

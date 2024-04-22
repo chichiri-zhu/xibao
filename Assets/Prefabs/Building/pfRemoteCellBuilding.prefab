@@ -348,6 +348,7 @@ GameObject:
   - component: {fileID: 4534674630780852242}
   - component: {fileID: 1378288405042886933}
   - component: {fileID: 5482548581956064142}
+  - component: {fileID: -6845474310200547109}
   m_Layer: 7
   m_Name: pfRemoteCellBuilding
   m_TagString: Building
@@ -472,6 +473,18 @@ MonoBehaviour:
   talentChosen: 0
   building: {fileID: 0}
   isUpgradePaid: 0
+--- !u!114 &-6845474310200547109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3734139385185250837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 903de7656806647619124b70877fe591, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4067311226547609467
 GameObject:
   m_ObjectHideFlags: 0

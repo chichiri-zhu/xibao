@@ -96,6 +96,8 @@ GameObject:
   - component: {fileID: 8098928144888374450}
   - component: {fileID: 1703654340763756850}
   - component: {fileID: 4217564702720051901}
+  - component: {fileID: 2452360248807472600}
+  - component: {fileID: 8479526552036491534}
   m_Layer: 7
   m_Name: pfHeart
   m_TagString: Building
@@ -119,7 +121,7 @@ Transform:
   - {fileID: 7425060005337585945}
   - {fileID: 1588384717869073621}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8098928144888374450
 MonoBehaviour:
@@ -199,6 +201,30 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 10.348323, y: 8.575664}
   m_EdgeRadius: 0
+--- !u!114 &2452360248807472600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3734139385185250837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 903de7656806647619124b70877fe591, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8479526552036491534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3734139385185250837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f642995529ba74ae6bac9cbfc46c25ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4321337638664347885
 GameObject:
   m_ObjectHideFlags: 0

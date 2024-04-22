@@ -354,6 +354,7 @@ GameObject:
   - component: {fileID: 1074192409467259347}
   - component: {fileID: 6376543740546092312}
   - component: {fileID: 1099889583808693374}
+  - component: {fileID: -8767431958834973477}
   m_Layer: 8
   m_Name: pfNK
   m_TagString: Soldier
@@ -393,6 +394,7 @@ MonoBehaviour:
   soldier: {fileID: 11400000, guid: 7febcd471a96f4f91886c1dca9935b53, type: 2}
   isMoving: 0
   animator: {fileID: 5913347661941658513}
+  navMeshAgent: {fileID: 0}
 --- !u!70 &2129991121847960042
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -520,6 +522,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f642995529ba74ae6bac9cbfc46c25ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!195 &-8767431958834973477
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6420839838195514782}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 1
 --- !u!1 &6546398033787299445
 GameObject:
   m_ObjectHideFlags: 0

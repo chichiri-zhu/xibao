@@ -21,11 +21,27 @@ public class MovementSystem : MonoBehaviour
         myInput.Player.Move.canceled += ctx => moveInput = Vector2.zero;
     }
 
-    private void Update()
+    //private void Update()
+    //{
+    //    //HandleMovement();
+    //}
+
+    private void FixedUpdate()
     {
-        //HandleMovement();
         player.SetMoveDir(moveInput);
     }
+
+    //private void FixedUpdate()
+    //{
+    //    moveInput = new Vector2(1,0);
+    //    if(moveInput != Vector2.zero)
+    //    {
+    //        Vector2 pos = transform.position;
+    //        pos = pos + 10 * moveInput * Time.fixedDeltaTime;
+    //        player.playerController.SetPosition(pos);
+    //    }
+
+    //}
 
     //private void HandleMovement()
     //{

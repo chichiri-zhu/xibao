@@ -2,7 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
+public enum SoldierStatus
+{
+    Default,
+    Death
+}
 public class SoldierBase : MonoBehaviour
 {
     [SerializeField] private ArmsSO soldier;
@@ -10,6 +16,8 @@ public class SoldierBase : MonoBehaviour
     protected HealthSystem healthSystem;
     public bool isMoving;
     public Animator animator;
+    public NavMeshAgent navMeshAgent;
+    protected SoldierStatus soldierStatus;
 
     public event EventHandler<DoHitArgs> OnDoHit;
 
@@ -24,6 +32,12 @@ public class SoldierBase : MonoBehaviour
         {
             AnimationEvents animationEvents = animator.GetComponent<AnimationEvents>();
             animationEvents.OnCustomEvent += AnimationEvents_OnCustomEvent;
+        }
+        navMeshAgent = GetComponent<NavMeshAgent>();
+        if(navMeshAgent != null)
+        {
+            navMeshAgent.updateRotation = false;
+            navMeshAgent.updateUpAxis = false;
         }
     }
 
@@ -78,6 +92,10 @@ public class SoldierBase : MonoBehaviour
 
     public void DoHit(UnitBase targetUnit)
     {
+        if(soldierStatus == SoldierStatus.Death)
+        {
+            return;
+        }
         OnDoHit?.Invoke(this, new DoHitArgs { targetUnit = targetUnit });
     }
 
@@ -107,6 +125,21 @@ public class SoldierBase : MonoBehaviour
     protected virtual void _DoHit()
     {
         GetComponent<HitBase>().DoDamage();
+    }
+
+    public SoldierStatus GetSoldierStatus()
+    {
+        return soldierStatus;
+    }
+
+    public void Move(Vector3 pos)
+    {
+        float agentOffset = 0.01f;
+        Vector3 agentPos = (Vector3)(agentOffset * UnityEngine.Random.insideUnitCircle) + pos;
+        if(navMeshAgent != null)
+        {
+            navMeshAgent.SetDestination(agentPos);
+        }
     }
 
     private void OnDestroy()

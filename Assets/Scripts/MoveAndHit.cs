@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public enum LookForTargetType
 {
@@ -18,12 +19,14 @@ public class MoveAndHit : MonoBehaviour
     protected float defaultFindRof = 3;
     [SerializeField] protected LookForTargetType lookForTargetType = LookForTargetType.All;
     public int turnAmend = 1;
+    protected NavMeshAgent navMeshAgent;
 
     public Vector2 lookDirection;
 
     protected void Awake()
     {
         soldier = GetComponent<SoldierBase>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
         OnAwake();
     }
 
@@ -87,9 +90,17 @@ public class MoveAndHit : MonoBehaviour
             {
                 //Move
                 soldier.SetWalk();
-                Vector2 position = transform.position;
-                position = position + soldier.GetMoveSpeed() * lookDirection * Time.deltaTime;
-                transform.position = position;
+                if(navMeshAgent != null)
+                {
+                    //navMeshAgent.SetDestination(targetUnit.transform.position);
+                    soldier.Move(targetUnit.transform.position);
+                }
+                else
+                {
+                    Vector2 position = transform.position;
+                    position = position + soldier.GetMoveSpeed() * lookDirection * Time.deltaTime;
+                    transform.position = position;
+                }
             }
             Turn(lookDirection.x);
         }

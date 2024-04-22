@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour
 {
     public PlayerStateMachine StateMachine;
     private Player player;
+    private NavMeshAgent navMeshAgent;
 
     private void Start()
     {
         //这里直接把info绑玩家身上了，数据类还有其他获取方法
         player = GetComponent<Player>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
         StateMachine = new(player, this);
         //添加状态类
         StateMachine.AddState((int)PlayerStateEnum.Move, new PlayerState_Move(StateMachine));
@@ -28,12 +31,20 @@ public class PlayerController : MonoBehaviour
     //我是把移动速度赋值逻辑写在了移动状态，所以这里没有任何移动逻辑
     public void FixedUpdate()
     {
+        //Debug.Log(Time.fixedDeltaTime);
         StateMachine.FixedUpdate();
     }
 
-    public void SetPosition(Vector2 position)
+    public void SetPosition(Vector3 position)
     {
-        transform.position = position;
+        if(navMeshAgent != null)
+        {
+            navMeshAgent.Warp(position);
+        }
+        else
+        {
+            player.transform.position = position;
+        }
     }
 
     public void BuildingStart()

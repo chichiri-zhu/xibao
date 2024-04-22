@@ -3,20 +3,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class Player : SoldierBase
 {
     public PlayerController playerController;
     private Rigidbody2D rigidbody2d;
-    public Vector2 movePositionDir;
+    public Vector3 movePositionDir;
 
     private bool isBuilding = false;
     private BuildingPlace currentBuildingPlace;
+
+    private float reviveTimeMax = 10f;
+    private float reviveTime = 10f;
 
     public override void Awake()
     {
         base.Awake();
         rigidbody2d = GetComponent<Rigidbody2D>();
         playerController = GetComponent<PlayerController>();
+    }
+
+    private void Update()
+    {
+        if(soldierStatus == SoldierStatus.Death)
+        {
+            if(reviveTime <= 0)
+            {
+                //复活
+                Revive();
+            }
+            reviveTime -= Time.deltaTime;
+        }
+    }
+
+    public override void OnStart()
+    {
+        healthSystem.OnDied += HealthSystem_OnDied;
+    }
+
+    private void HealthSystem_OnDied(object sender, EventArgs e)
+    {
+        Death();
     }
 
     public BuildingPlace GetOverBuildingPlace()
@@ -87,8 +115,11 @@ public class Player : SoldierBase
         }
         else
         {
+            //SetWalk();
             isMoving = true;
             movePositionDir = moveInput;
+            //Debug.Log(moveInput);
+            
             moveInput.Normalize();
             Turn(moveInput.x);
         }
@@ -171,5 +202,24 @@ public class Player : SoldierBase
         {
             return null;
         }
+    }
+
+    public void Death()
+    {
+        Debug.Log("Death");
+        soldierStatus = SoldierStatus.Death;
+    }
+
+    public void Revive()
+    {
+        Debug.Log("Revive");
+        soldierStatus = SoldierStatus.Default;
+        healthSystem.Revive();
+        reviveTime = reviveTimeMax;
+    }
+
+    private void OnDestroy()
+    {
+        healthSystem.OnDied -= HealthSystem_OnDied;
     }
 }
