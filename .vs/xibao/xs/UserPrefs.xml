@@ -1,8 +1,20 @@
 ﻿<Properties StartupConfiguration="{BA10CE7F-396A-7AC1-E4BF-A00951247B22}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/System/MovementSystem.cs" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Talents/Heart/HuansuTalent.cs">
+    <Files>
+      <File FileName="Assets/Scripts/CommandController.cs" Line="66" Column="71" />
+      <File FileName="Assets/Scripts/FollowController.cs" Line="6" Column="14" />
+      <File FileName="Assets/Scripts/Soldier/Soldier.cs" Line="44" Column="34" />
+      <File FileName="Assets/Scripts/Talents/Heart/HuansuTalent.cs" Line="12" Column="1" />
+      <File FileName="Assets/Scripts/Base/HitBase.cs" Line="155" Column="9" />
+      <File FileName="Assets/Scripts/Buff/HuansuBuff.cs" Line="40" Column="6" />
+      <File FileName="Assets/Scripts/Buff/Buffs/TCellBuff.cs" Line="5" Column="19" />
+      <File FileName="Assets/Scripts/Buff/BuffBase.cs" Line="4" Column="14" />
+      <File FileName="Assets/Scripts/Bullet/TCellBullet.cs" Line="36" Column="42" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="e698a9b4-e1a4-4f54-bfab-e1ecb5851c9b" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="196b5f7a-a7b0-4de3-beba-356b3e3c788a" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

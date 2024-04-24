@@ -98,7 +98,6 @@ public class HitBase : MonoBehaviour
         AttributeParam soldierParam = attributeSystem.GetAttributeParam();
         float fixAtkSpeed = soldierParam.AtkSpeed;
         hitTimer = 1 / fixAtkSpeed;
-        Debug.Log(hitTimer);
     }
 
     public int GetFinalDmg(UnitBase unit, out DamageRes damageRes, bool isReal = false, bool isCrt = false)

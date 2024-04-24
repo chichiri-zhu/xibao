@@ -8,6 +8,7 @@ public class BuildingPlace : MonoBehaviour
     [SerializeField] private BuildingTypeSO buildingType;
     [SerializeField] private Transform buildingView;
     [SerializeField] private Transform resourcesTransform;
+    private SpriteRenderer sprite;
 
     private float buildingTimerMax;
     private float buildingTime;
@@ -24,6 +25,8 @@ public class BuildingPlace : MonoBehaviour
 
     private void Start()
     {
+        sprite = buildingView.Find("sprite").GetComponent<SpriteRenderer>();
+        sprite.sprite = buildingType.sprite;
         BuildingManager.Instance.OnBuildEnd += Instance_OnBuildEnd;
         _HideResource();
     }

@@ -138,6 +138,10 @@ public class SoldierBase : MonoBehaviour
         Vector3 agentPos = (Vector3)(agentOffset * UnityEngine.Random.insideUnitCircle) + pos;
         if(navMeshAgent != null)
         {
+            if (navMeshAgent.isStopped)
+            {
+                navMeshAgent.isStopped = false;
+            }
             navMeshAgent.SetDestination(agentPos);
         }
     }

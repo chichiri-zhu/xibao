@@ -16,9 +16,9 @@ public class BuildingManager : SingleBase<BuildingManager>
 
     public BuildingBase Build(BuildingTypeSO buildingType, BuildingPlace buildingPlace)
     {
-        Transform buildingTransform = Instantiate(buildingType.prefab, buildingPlace.transform.position, Quaternion.identity);
-        buildingTransform.SetParent(buildingTransform);
-        BuildingBase buildingBase = buildingTransform.GetComponent<BuildingBase>();
+        Transform building = Instantiate(buildingType.prefab, buildingPlace.transform.position, Quaternion.identity);
+        building.SetParent(buildingTransform);
+        BuildingBase buildingBase = building.GetComponent<BuildingBase>();
         if(buildingBase != null && !buildingList.Contains(buildingBase))
         {
             buildingList.Add(buildingBase);
