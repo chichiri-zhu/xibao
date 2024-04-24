@@ -23,7 +23,11 @@ public class EnemyMoveAndHit : MoveAndHit
                 continue;
             }
             UnitBase unit = collider.GetComponent<UnitBase>();
-            if(targetUnit == null)
+            if (!unit.CanLookFor())
+            {
+                continue;
+            }
+            if(targetUnit == null || !targetUnit.CanLookFor())
             {
                 targetUnit = unit;
             }
@@ -40,7 +44,7 @@ public class EnemyMoveAndHit : MoveAndHit
             }
         }
 
-        if (targetUnit == null)
+        if (targetUnit == null || !targetUnit.CanLookFor())
         {
             targetUnit = GameManager.Instance.GetMainBuilding()?.GetComponent<UnitBase>();
         }

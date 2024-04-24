@@ -22,7 +22,11 @@ public class SoldierMoveAndHit : MoveAndHit
                 continue;
             }
             UnitBase unit = collider.GetComponent<UnitBase>();
-            if(targetUnit == null)
+            if (!unit.CanLookFor())
+            {
+                continue;
+            }
+            if(targetUnit == null || !targetUnit.CanLookFor())
             {
                 targetUnit = unit;
             }

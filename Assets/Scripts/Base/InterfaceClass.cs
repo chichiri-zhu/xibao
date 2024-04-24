@@ -11,3 +11,8 @@ public interface IShowUI
     void Show();
     void Hide();
 }
+
+public interface IConstructionAble
+{
+    float GetConstructionTimerNormalized();
+}

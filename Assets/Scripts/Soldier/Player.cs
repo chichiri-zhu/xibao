@@ -218,6 +218,11 @@ public class Player : SoldierBase
         reviveTime = reviveTimeMax;
     }
 
+    public float GetReviveNormalized()
+    {
+        return reviveTime / reviveTimeMax;
+    }
+
     private void OnDestroy()
     {
         healthSystem.OnDied -= HealthSystem_OnDied;
