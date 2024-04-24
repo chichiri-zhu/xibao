@@ -12,9 +12,8 @@ public class TowerUpgrade : UpgradeBase
     }
     public override IEnumerator _DoUpgrade()
     {
-        Transform towerTwoTransform = AssetManager.Instance.buildingListSO.buildingList.FirstOrDefault(obj => obj.name == "TowerTwo").prefab;
-        Instantiate(towerTwoTransform, transform.position, Quaternion.identity);
-        Destroy(transform.gameObject);
+        BuildingManager.Instance.Build(AssetManager.Instance.buildingListSO.buildingList.FirstOrDefault(obj => obj.name == "TowerTwo"), transform.position);
+        BuildingManager.Instance.RemoveBuilding(GetComponent<BuildingBase>());
         yield return null;
     }
 }
