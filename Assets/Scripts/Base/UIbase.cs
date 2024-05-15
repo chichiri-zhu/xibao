@@ -34,7 +34,8 @@ public class UIbase : MonoBehaviour, IShowUI
     {
         //myInput.Enable();
         isShow = true;
-        transform.localScale = new Vector3(1, 1, 1);
+        //transform.localScale = new Vector3(1, 1, 1);
+        gameObject.SetActive(true);
         if (OnShow != null)
         {
             OnShow();
@@ -45,8 +46,9 @@ public class UIbase : MonoBehaviour, IShowUI
     {
         //myInput.Disable();
         isShow = false;
-        transform.localScale = new Vector3(0, 0, 0);
-        if(OnClose != null)
+        //transform.localScale = new Vector3(0, 0, 0);
+        gameObject.SetActive(false);
+        if (OnClose != null)
         {
             OnClose();
         }

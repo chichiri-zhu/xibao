@@ -1,5 +1,5 @@
 ﻿<Properties StartupConfiguration="{BA10CE7F-396A-7AC1-E4BF-A00951247B22}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/ExcelToLevelData.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Base/UIbase.cs">
     <Files>
       <File FileName="Assets/Scripts/Soldier/Enemy.cs" Line="77" Column="10" />
       <File FileName="Assets/Scripts/Base/SoldierBase.cs" Line="11" Column="2" />
@@ -10,15 +10,16 @@
       <File FileName="Assets/Scripts/EnemyMoveAndHit.cs" Line="57" Column="14" />
       <File FileName="Assets/Scripts/SoldierMoveAndHit.cs" Line="14" Column="26" />
       <File FileName="Assets/Scripts/System/AttributeSystem.cs" Line="109" Column="105" />
-      <File FileName="Assets/Scripts/Base/UIbase.cs" Line="22" Column="11" />
-      <File FileName="Assets/Scripts/UI/PauseUI.cs" Line="18" Column="12" />
-      <File FileName="Assets/Scripts/Manager/GameManager.cs" Line="22" Column="1" />
+      <File FileName="Assets/Scripts/Base/UIbase.cs" Line="6" Column="14" />
+      <File FileName="Assets/Scripts/UI/PauseUI.cs" Line="5" Column="26" />
+      <File FileName="Assets/Scripts/Manager/GameManager.cs" Line="27" Column="28" />
       <File FileName="Assets/Scripts/Base/enumClass.cs" Line="1" Column="13" />
       <File FileName="Assets/Scripts/System/HealthSystem.cs" Line="135" Column="6" />
       <File FileName="Assets/Scripts/UI/UIImageGradient.cs" Line="21" Column="6" />
       <File FileName="Assets/Scripts/Manager/CanvasManager.cs" Line="7" Column="30" />
-      <File FileName="Assets/Scripts/ExcelToLevelData.cs" Line="71" Column="18" />
+      <File FileName="Assets/Scripts/ExcelToLevelData.cs" Line="82" Column="26" />
       <File FileName="Assets/Scripts/Manager/LevelManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/TopDownEngine/Common/Scripts/Characters/CharacterAbilities/CharacterInventory.cs" Line="75" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
