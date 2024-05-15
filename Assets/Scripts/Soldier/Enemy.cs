@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Assets.FantasyMonsters.Scripts;
 using UnityEngine;
 
 public class Enemy : SoldierBase
 {
+    private Monster monster;
     public static Enemy Create(ArmsSO arms, Vector3 position)
     {
         Transform soldierTransform = Instantiate(arms.prefab, position, Quaternion.identity);
@@ -19,6 +21,10 @@ public class Enemy : SoldierBase
     public override void OnStart()
     {
         //enemyController = GetComponent<EnemyController>();
+        if(soldierSource == SoldierSource.Monster)
+        {
+            monster = GetComponentInChildren<Monster>();
+        }
         
         if(healthSystem != null)
         {
@@ -35,18 +41,39 @@ public class Enemy : SoldierBase
     {
         if(animator != null)
         {
-            animator?.SetBool("Walk", true);
+            if(soldierSource == SoldierSource.Owner)
+            {
+                animator?.SetBool("Walk", true);
+            }
+            else
+            {
+                monster.SetState(MonsterState.Idle);
+            }
         }
     }
 
     public override void SetWalk()
     {
-        animator?.SetBool("Walk", true);
+        if (soldierSource == SoldierSource.Owner)
+        {
+            animator?.SetBool("Walk", true);
+        }
+        else
+        {
+            monster.SetState(MonsterState.Walk);
+        }
     }
 
     public override void SetHit()
     {
-        animator?.SetBool("Walk", false);
-        animator?.SetTrigger("Hit");
+        if (soldierSource == SoldierSource.Owner)
+        {
+            animator?.SetBool("Walk", false);
+            animator?.SetTrigger("Hit");
+        }
+        else
+        {
+            monster.Attack();
+        }
     }
 }

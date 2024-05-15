@@ -133,7 +133,6 @@ public class HealthSystem : MonoBehaviour
 
     private void _DoDamage(int damageAmount)
     {
-        Debug.Log(gameObject + ":" + damageAmount);
         healthAmount -= damageAmount;
         healthAmount = Mathf.Clamp(healthAmount, 0, healthAmountMax);
     }

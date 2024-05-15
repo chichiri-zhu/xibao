@@ -4,8 +4,18 @@ using UnityEngine;
 
 public class UnitBase : MonoBehaviour
 {
+    public Collider2D collider2d;
+
     private void Start()
     {
+        if (collider2d == null)
+        {
+            collider2d = GetComponent<Collider2D>();
+            if (collider2d == null)
+            {
+                collider2d = GetComponentInChildren<Collider2D>();
+            }
+        }
         OnStart();
     }
 

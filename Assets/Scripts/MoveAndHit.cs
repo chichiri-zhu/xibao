@@ -76,7 +76,7 @@ public class MoveAndHit : MonoBehaviour
     {
         if(targetUnit != null)
         {
-            float distance = UtilsClass.ColliderDistance(targetUnit.transform.GetComponent<Collider2D>(), transform.GetComponent<Collider2D>());
+            float distance = UtilsClass.ColliderDistance(targetUnit.collider2d, soldier.collider2d);
             lookDirection = targetUnit.transform.position - transform.position;
             lookDirection.Normalize();
 
@@ -114,7 +114,9 @@ public class MoveAndHit : MonoBehaviour
 
     public void Turn(float direction)
     {
-        transform.localScale = new Vector3(Mathf.Sign(direction) * turnAmend, 1, 1);
+        //transform.localScale = new Vector3(Mathf.Sign(direction) * turnAmend, 1, 1);
+        Vector3 localScale = soldier.body.localScale;
+        soldier.body.localScale = new Vector3(Mathf.Sign(direction) * turnAmend * Mathf.Abs(localScale.x), localScale.y, localScale.z);
     }
 
     public UnitBase GetTargetUnit()

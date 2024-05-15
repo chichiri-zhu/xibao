@@ -159,7 +159,7 @@ Transform:
   - {fileID: 3772217472111636445}
   - {fileID: 3110244781812792894}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6611928108483057132
 MonoBehaviour:
@@ -174,6 +174,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soldier: {fileID: 11400000, guid: 9c5a1265f3b0e41519934b7ab67db810, type: 2}
+  body: {fileID: 3772217472111636445}
+  soldierSource: 0
+  collider2d: {fileID: 0}
   isMoving: 0
   animator: {fileID: 313404185958897681}
   navMeshAgent: {fileID: 0}
@@ -207,7 +210,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.087102845, y: 0.009678066}
@@ -266,6 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96f464043454b474c9cb2856d675c972, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collider2d: {fileID: 0}
 --- !u!114 &977837347292290930
 MonoBehaviour:
   m_ObjectHideFlags: 0

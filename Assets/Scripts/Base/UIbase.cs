@@ -17,10 +17,8 @@ public class UIbase : MonoBehaviour, IShowUI
         myInput.Enable();
         myInput.Player.Esc.performed += ctx =>
         {
-            if (isShow)
-            {
-                HandleEsc();
-            }
+            Debug.Log("esc");
+            HandleEsc();
         };
 
         Hide();
@@ -34,7 +32,7 @@ public class UIbase : MonoBehaviour, IShowUI
 
     public virtual void Show()
     {
-        myInput.Enable();
+        //myInput.Enable();
         isShow = true;
         transform.localScale = new Vector3(1, 1, 1);
         if (OnShow != null)
@@ -45,7 +43,7 @@ public class UIbase : MonoBehaviour, IShowUI
 
     public virtual void Hide()
     {
-        myInput.Disable();
+        //myInput.Disable();
         isShow = false;
         transform.localScale = new Vector3(0, 0, 0);
         if(OnClose != null)
@@ -56,7 +54,10 @@ public class UIbase : MonoBehaviour, IShowUI
 
     public virtual void HandleEsc()
     {
-        Hide();
+        if (isShow)
+        {
+            Hide();
+        }
     }
 
     public bool IsShow()

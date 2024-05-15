@@ -1,15 +1,29 @@
 ﻿<Properties StartupConfiguration="{BA10CE7F-396A-7AC1-E4BF-A00951247B22}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Library/PackageCache/com.unity.inputsystem@1.6.3/InputSystem/Utilities/DelegateHelpers.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/ExcelToLevelData.cs">
     <Files>
-      <File FileName="Assets/Scripts/Upgrade/RedBuilding/RedBuildingUpgrade.cs" Line="14" Column="9" />
-      <File FileName="Assets/Scripts/Upgrade/Tower/TowerUpgrade.cs" Line="14" Column="6" />
-      <File FileName="Assets/Scripts/Upgrade/WhiteCell/WhiteCellUpgrade.cs" Line="1" Column="1" />
-      <File FileName="Library/PackageCache/com.unity.inputsystem@1.6.3/InputSystem/Utilities/DelegateHelpers.cs" Line="52" Column="1" />
+      <File FileName="Assets/Scripts/Soldier/Enemy.cs" Line="77" Column="10" />
+      <File FileName="Assets/Scripts/Base/SoldierBase.cs" Line="11" Column="2" />
+      <File FileName="Assets/FantasyMonsters/Scripts/Monster.cs" Line="49" Column="37" />
+      <File FileName="Assets/FantasyMonsters/Scripts/MonsterState.cs" Line="6" Column="17" />
+      <File FileName="Assets/Scripts/MoveAndHit.cs" Line="119" Column="106" />
+      <File FileName="Assets/Scripts/Base/UnitBase.cs" Line="7" Column="34" />
+      <File FileName="Assets/Scripts/EnemyMoveAndHit.cs" Line="57" Column="14" />
+      <File FileName="Assets/Scripts/SoldierMoveAndHit.cs" Line="14" Column="26" />
+      <File FileName="Assets/Scripts/System/AttributeSystem.cs" Line="109" Column="105" />
+      <File FileName="Assets/Scripts/Base/UIbase.cs" Line="22" Column="11" />
+      <File FileName="Assets/Scripts/UI/PauseUI.cs" Line="18" Column="12" />
+      <File FileName="Assets/Scripts/Manager/GameManager.cs" Line="22" Column="1" />
+      <File FileName="Assets/Scripts/Base/enumClass.cs" Line="1" Column="13" />
+      <File FileName="Assets/Scripts/System/HealthSystem.cs" Line="135" Column="6" />
+      <File FileName="Assets/Scripts/UI/UIImageGradient.cs" Line="21" Column="6" />
+      <File FileName="Assets/Scripts/Manager/CanvasManager.cs" Line="7" Column="30" />
+      <File FileName="Assets/Scripts/ExcelToLevelData.cs" Line="71" Column="18" />
+      <File FileName="Assets/Scripts/Manager/LevelManager.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="196b5f7a-a7b0-4de3-beba-356b3e3c788a" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="2be39f48-ad45-4f3b-bbba-fcce1f0477d7" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

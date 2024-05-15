@@ -631,7 +631,7 @@ Transform:
   - {fileID: 5191973272698638564}
   - {fileID: 3294544041431916285}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3224124725855241271
 MonoBehaviour:
@@ -646,6 +646,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soldier: {fileID: 11400000, guid: 9cab926d972944edebbbab31621c64ba, type: 2}
+  body: {fileID: 5191973272698638564}
+  soldierSource: 0
+  collider2d: {fileID: 0}
   isMoving: 0
   animator: {fileID: 3946823847598017439}
   navMeshAgent: {fileID: 0}
@@ -678,7 +681,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.08, y: 0.03}
@@ -776,6 +779,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f642995529ba74ae6bac9cbfc46c25ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collider2d: {fileID: 0}
 --- !u!195 &6855490858944791353
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -795,7 +799,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 0
+  m_BaseOffset: 0.78
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 1
 --- !u!1 &6248742518193743453

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 public class GameManager : SingleBase<GameManager>
 {
@@ -18,6 +19,28 @@ public class GameManager : SingleBase<GameManager>
     public event EventHandler OnGameStatusUpdate;
     public event EventHandler OnPause;
     public event EventHandler OnRegain;
+
+    public MyInput myInput;
+
+    public override void OnAwake()
+    {
+        Time.timeScale = 1;
+        myInput = new MyInput();
+        myInput.Enable();
+        myInput.Player.Esc.performed += ctx =>
+        {
+            if (IsPause())
+            {
+                Regain();
+                CanvasManager.Instance.pauseUI.GetComponent<UIbase>().Hide();
+            }
+            else
+            {
+                Pause();
+                CanvasManager.Instance.pauseUI.GetComponent<UIbase>().Show();
+            }
+        };
+    }
 
     public Player GetPlayer()
     {
@@ -56,6 +79,11 @@ public class GameManager : SingleBase<GameManager>
         OnBattleStart?.Invoke(this, EventArgs.Empty);
     }
 
+    public bool IsPause()
+    {
+        return isPause;
+    }
+
     //暂停游戏
     public void Pause()
     {
@@ -73,5 +101,11 @@ public class GameManager : SingleBase<GameManager>
             Time.timeScale = 1;
             OnRegain?.Invoke(this, EventArgs.Empty);
         }
+    }
+
+    public void Restart()
+    {
+        //SceneManager.LoadScene(0, LoadSceneMode.Additive);
+        SceneManager.LoadScene(0);
     }
 }

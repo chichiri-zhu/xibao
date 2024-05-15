@@ -46,7 +46,15 @@ public class EnemyMoveAndHit : MoveAndHit
 
         if (targetUnit == null || !targetUnit.CanLookFor())
         {
-            targetUnit = GameManager.Instance.GetMainBuilding()?.GetComponent<UnitBase>();
+            UnitBase heartTarget = GameManager.Instance.GetMainBuilding()?.GetComponent<UnitBase>();
+            if (heartTarget.CanLookFor())
+            {
+                targetUnit = heartTarget;
+            }
+            else
+            {
+                targetUnit = null;
+            }
         }
     }
 

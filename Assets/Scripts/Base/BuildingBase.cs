@@ -43,7 +43,8 @@ public class BuildingBase : MonoBehaviour
 
     private void Instance_OnPrepareStart(object sender, System.EventArgs e)
     {
-        buildingStatus = BuildingStatus.Default;
+        //buildingStatus = BuildingStatus.Default;
+        Revive();
     }
 
     protected virtual void OnStart()
@@ -53,8 +54,7 @@ public class BuildingBase : MonoBehaviour
 
     private void HealthSystem_OnDied(object sender, System.EventArgs e)
     {
-        buildingStatus = BuildingStatus.Destroy;
-        //Destroy(transform.gameObject);
+        Died();
     }
 
     private void _OnPlayerEnter()
@@ -101,6 +101,21 @@ public class BuildingBase : MonoBehaviour
     public BuildingStatus GetBuildingStatus()
     {
         return buildingStatus;
+    }
+
+    public virtual void Died()
+    {
+        buildingStatus = BuildingStatus.Destroy;
+        gameObject.SetActive(false);
+        //Destroy(transform.gameObject);
+        Instantiate(AssetManager.Instance.ruinsPF, transform.position, Quaternion.identity);
+    }
+
+    public virtual void Revive()
+    {
+        buildingStatus = BuildingStatus.Default;
+        gameObject.SetActive(true);
+        healthSystem.Revive();
     }
 
     protected virtual void OnDestroy()

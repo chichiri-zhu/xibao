@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7613256426811649120}
   - component: {fileID: 1176154031322777900}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 779437150437299313}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 4778931123816113435}
   - component: {fileID: 8390894547461563082}
   - component: {fileID: 275709745218827773}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: pfHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,7 +150,7 @@ Transform:
   - {fileID: 6150508485211371343}
   - {fileID: 779437150437299313}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8390894547461563082
 MonoBehaviour:
@@ -189,7 +189,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6150508485211371343}
   - component: {fileID: 574263778862209471}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: barBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -273,7 +273,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3592681996426191403}
   - component: {fileID: 4079306223557733159}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: barSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

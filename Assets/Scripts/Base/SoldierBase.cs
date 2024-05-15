@@ -9,9 +9,19 @@ public enum SoldierStatus
     Default,
     Death
 }
+
+public enum SoldierSource
+{
+    Owner,
+    Monster
+}
+
 public class SoldierBase : MonoBehaviour
 {
-    [SerializeField] private ArmsSO soldier;
+    [SerializeField] protected ArmsSO soldier;
+    public Transform body;
+    public SoldierSource soldierSource;
+    [SerializeField] public Collider2D collider2d;
     protected AttributeSystem attributeSystem;
     protected HealthSystem healthSystem;
     public bool isMoving;
@@ -30,8 +40,11 @@ public class SoldierBase : MonoBehaviour
         }
         if(animator != null)
         {
-            AnimationEvents animationEvents = animator.GetComponent<AnimationEvents>();
-            animationEvents.OnCustomEvent += AnimationEvents_OnCustomEvent;
+            if(soldierSource == SoldierSource.Owner)
+            {
+                AnimationEvents animationEvents = animator.GetComponent<AnimationEvents>();
+                animationEvents.OnCustomEvent += AnimationEvents_OnCustomEvent;
+            }
         }
         navMeshAgent = GetComponent<NavMeshAgent>();
         if(navMeshAgent != null)
@@ -39,17 +52,47 @@ public class SoldierBase : MonoBehaviour
             navMeshAgent.updateRotation = false;
             navMeshAgent.updateUpAxis = false;
         }
+
+        if(collider2d == null)
+        {
+            collider2d = GetComponent<Collider2D>();
+            if(collider2d == null)
+            {
+                collider2d = GetComponentInChildren<Collider2D>();
+            }
+        }
     }
 
     private void Start()
     {
         healthSystem = transform.GetComponent<HealthSystem>();
+        if(attributeSystem != null)
+        {
+            attributeSystem.OnAttributeAmountUpdate += AttributeSystem_OnAttributeAmountUpdate;
+        }
         OnStart();
+        InitRof(attributeSystem.GetAttributeParam().Rof);
+    }
+
+    private void AttributeSystem_OnAttributeAmountUpdate(object sender, OnAttributeAmountUpdateArgs e)
+    {
+        if(e.attribute == Attribute.Rof)
+        {
+            InitRof(e.amount);
+        }
     }
 
     public virtual void OnStart()
     {
 
+    }
+
+    public void InitRof(float rof)
+    {
+        if(navMeshAgent != null)
+        {
+            navMeshAgent.stoppingDistance = rof;
+        }
     }
 
     public float GetMoveSpeed()
@@ -151,8 +194,11 @@ public class SoldierBase : MonoBehaviour
         SoldierManager.Instance.RemoveSoldier(this);
         if (animator != null)
         {
-            AnimationEvents animationEvents = animator.GetComponent<AnimationEvents>();
-            animationEvents.OnCustomEvent -= AnimationEvents_OnCustomEvent;
+            if (soldierSource == SoldierSource.Owner)
+            {
+                AnimationEvents animationEvents = animator.GetComponent<AnimationEvents>();
+                animationEvents.OnCustomEvent -= AnimationEvents_OnCustomEvent;
+            }
         }
     }
 }
