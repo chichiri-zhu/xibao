@@ -12,9 +12,10 @@ public class BuildingPlace : MonoBehaviour
 
     private float buildingTimerMax;
     private float buildingTime;
-    private Coroutine buildingCoroutine;
+    //private Coroutine buildingCoroutine;
     private List<ExpendResource> expendResourceList;
     private int paidGoldAmount = 0;
+    private Player player;
 
     private void Awake()
     {
@@ -25,6 +26,7 @@ public class BuildingPlace : MonoBehaviour
 
     private void Start()
     {
+        player = GameManager.Instance.GetPlayer();
         sprite = buildingView.Find("sprite").GetComponent<SpriteRenderer>();
         sprite.sprite = buildingType.sprite;
         BuildingManager.Instance.OnBuildEnd += Instance_OnBuildEnd;
@@ -86,7 +88,7 @@ public class BuildingPlace : MonoBehaviour
     public void StartBuilding()
     {
         buildingTimerMax = buildingType.constructionTimerMax;
-        buildingCoroutine = StartCoroutine(_HandleStartBuilding());
+        player.actionCoroutine = StartCoroutine(_HandleStartBuilding());
     }
 
     private float timer; //按空格时长
@@ -95,7 +97,7 @@ public class BuildingPlace : MonoBehaviour
     public bool isBuildingFinish;
     private IEnumerator _HandleStartBuilding()
     {
-        InitResources();
+        //InitResources();
         foreach (ExpendResource resource in expendResourceList)
         {
             if(ResourceManager.Instance.GetGold() <= 0)
@@ -152,12 +154,7 @@ public class BuildingPlace : MonoBehaviour
     public void CancelBuilding()
     {
         isBuildingFinish = false;
-        if (buildingCoroutine != null)
-        {
-            StopCoroutine(buildingCoroutine);
-            //StopAllCoroutines();
-        }
-        buildingCoroutine = null;
+        player.CancelAction();
         InitResources();
         if(paidGoldAmount > 0)
         {
@@ -173,6 +170,7 @@ public class BuildingPlace : MonoBehaviour
 
     private void _OnPlayerEnter()
     {
+        InitResources();
         buildingView.gameObject?.SetActive(true);
         resourcesTransform.gameObject.SetActive(true);
         InputManager.Instance.AddBuildingEventHandler();
@@ -180,22 +178,31 @@ public class BuildingPlace : MonoBehaviour
 
     private void _onPlayerExit()
     {
+        player.CancelAction();
         buildingView.gameObject?.SetActive(false);
         _HideResource();
     }
 
+    private bool isEnter = false;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && GameManager.Instance.GetGameStatus() == GameStatus.Prepare && player.actionCoroutine == null)
         {
+            isEnter = true;
             _OnPlayerEnter();
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        InputManager.Instance.RemoveSpaceEventHandlers();
-        if (collision.gameObject.CompareTag("Player"))
+        if (!isEnter)
+        {
+            return;
+        }
+
+        isEnter = false;
+        InputManager.Instance.AddToBattleEventHandler();
+        if (collision.gameObject.CompareTag("Player") && GameManager.Instance.GetGameStatus() == GameStatus.Prepare)
         {
             _onPlayerExit();
         }

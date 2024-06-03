@@ -5,6 +5,7 @@ public enum GameStatus
     Prepare,    // 准备
     Battle,     // 战斗
     Cleared,    // 通关
+    GameOver
 }
 
 public enum GameDifficulty

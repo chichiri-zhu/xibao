@@ -5,4 +5,7 @@ using UnityEngine;
 public class CanvasManager : SingleBase<CanvasManager>
 {
     public Transform pauseUI;
+    public BattleTransitionUI battleTransitionUI;
+    public GameOverUI gameOverUI;
+    public TowerMergeUI towerMergeUI;
 }

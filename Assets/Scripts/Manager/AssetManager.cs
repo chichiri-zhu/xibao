@@ -6,6 +6,7 @@ public class AssetManager : SingleBase<AssetManager>
 {
     public SoldierListSO soldierListSO;
     public BuildingListSO buildingListSO;
+    public Transform mergeIcon;
     public Transform fontPointPF;   //伤害飘字pf
     public Transform ruinsPF;       //废墟pf
 }

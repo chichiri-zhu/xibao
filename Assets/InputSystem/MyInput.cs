@@ -62,6 +62,15 @@ public partial class @MyInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=2)"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Merge"",
+                    ""type"": ""Button"",
+                    ""id"": ""0d5a2dae-7c5e-4a0a-b8b3-5525ee5f4172"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -152,6 +161,17 @@ public partial class @MyInput: IInputActionCollection2, IDisposable
                     ""action"": ""Command"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fe5cc13a-b4c2-4657-b973-8da04764f2dd"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Merge"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -164,6 +184,7 @@ public partial class @MyInput: IInputActionCollection2, IDisposable
         m_Player_Building = m_Player.FindAction("Building", throwIfNotFound: true);
         m_Player_Esc = m_Player.FindAction("Esc", throwIfNotFound: true);
         m_Player_Command = m_Player.FindAction("Command", throwIfNotFound: true);
+        m_Player_Merge = m_Player.FindAction("Merge", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -229,6 +250,7 @@ public partial class @MyInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Building;
     private readonly InputAction m_Player_Esc;
     private readonly InputAction m_Player_Command;
+    private readonly InputAction m_Player_Merge;
     public struct PlayerActions
     {
         private @MyInput m_Wrapper;
@@ -237,6 +259,7 @@ public partial class @MyInput: IInputActionCollection2, IDisposable
         public InputAction @Building => m_Wrapper.m_Player_Building;
         public InputAction @Esc => m_Wrapper.m_Player_Esc;
         public InputAction @Command => m_Wrapper.m_Player_Command;
+        public InputAction @Merge => m_Wrapper.m_Player_Merge;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -258,6 +281,9 @@ public partial class @MyInput: IInputActionCollection2, IDisposable
             @Command.started += instance.OnCommand;
             @Command.performed += instance.OnCommand;
             @Command.canceled += instance.OnCommand;
+            @Merge.started += instance.OnMerge;
+            @Merge.performed += instance.OnMerge;
+            @Merge.canceled += instance.OnMerge;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -274,6 +300,9 @@ public partial class @MyInput: IInputActionCollection2, IDisposable
             @Command.started -= instance.OnCommand;
             @Command.performed -= instance.OnCommand;
             @Command.canceled -= instance.OnCommand;
+            @Merge.started -= instance.OnMerge;
+            @Merge.performed -= instance.OnMerge;
+            @Merge.canceled -= instance.OnMerge;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -297,5 +326,6 @@ public partial class @MyInput: IInputActionCollection2, IDisposable
         void OnBuilding(InputAction.CallbackContext context);
         void OnEsc(InputAction.CallbackContext context);
         void OnCommand(InputAction.CallbackContext context);
+        void OnMerge(InputAction.CallbackContext context);
     }
 }

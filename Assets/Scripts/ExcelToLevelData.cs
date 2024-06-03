@@ -7,29 +7,32 @@ using System.Linq;
 using Excel;
 using Newtonsoft.Json;
 
+
 public class ExcelToLevelData : MonoBehaviour
 {
-    [SerializeField] private Transform SendManagerTransform;
-    [SerializeField] private List<LevelEnemyAmount> levelEnemyAmountList;
+    [Tooltip("Only used if the character is player-controlled. The PlayerID must match an input manager's PlayerID. It's also used to match Unity's input settings. So you'll be safe if you keep to Player1, Player2, Player3 or Player4")]
+    public string test;
+    public Transform SendManagerTransform;
+    public List<LevelEnemyAmount> levelEnemyAmountList;
     public List<SendPoint> sendPointList;
+    public int pNum = 1;
 
-    void Start()
-    {
-        sendPointList = SendManagerTransform.GetComponentsInChildren<SendPoint>().ToList();
+    //void Start()
+    //{
         
-    }
+    //}
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            SavePlayComponent();
-        }
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            ReadExcel("/Data/test.xlsx");
-        }
-    }
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.V))
+    //    {
+    //        SavePlayComponent();
+    //    }
+    //    if (Input.GetKeyDown(KeyCode.C))
+    //    {
+    //        ReadExcel("/Data/test.xlsx");
+    //    }
+    //}
 
     public void SavePlayComponent()
     {
@@ -52,6 +55,7 @@ public class ExcelToLevelData : MonoBehaviour
 
     public void ReadExcel(string xmlName)
     {
+        sendPointList = SendManagerTransform.GetComponentsInChildren<SendPoint>().ToList();
         FileStream stream = File.Open(Application.dataPath + xmlName, FileMode.Open, FileAccess.Read, FileShare.Read);
         //IExcelDataReader excelReader = ExcelReaderFactory.CreateBinaryReader(stream);//读取 Excel 1997-2003版本
         IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);//读取 2007及以后的版本
@@ -67,49 +71,57 @@ public class ExcelToLevelData : MonoBehaviour
         int rows = counts[0];
         int columns = counts[1];
         //Debug.LogError("row:" + rows + "...col:" + columns);
-        levelEnemyAmountList = new List<LevelEnemyAmount>();
-        SoldierListSO soldierListSO = AssetManager.Instance.soldierListSO;
-        for (int i = 0; i < rows; i++)
+        
+        SoldierListSO soldierListSO = Resources.Load<SoldierListSO>("SoldierListSO");
+        int p = 1;
+        foreach (SendPoint item in sendPointList)
         {
-            int level = int.Parse(result.Tables[0].Rows[i][0].ToString());
-            string name = result.Tables[0].Rows[i][1].ToString();
-            int num = int.Parse(result.Tables[0].Rows[i][2].ToString());
-            float yanchiTime = float.Parse(result.Tables[0].Rows[i][3].ToString());
-            int pointNum = int.Parse(result.Tables[0].Rows[i][4].ToString());
-
-            if(pointNum != 1)
+            levelEnemyAmountList = new List<LevelEnemyAmount>();
+            for (int i = 0; i < rows; i++)
             {
-                continue;
-            }
+                int level = int.Parse(result.Tables[0].Rows[i][0].ToString());
+                string name = result.Tables[0].Rows[i][1].ToString();
+                int num = int.Parse(result.Tables[0].Rows[i][2].ToString());
+                float yanchiTime = float.Parse(result.Tables[0].Rows[i][3].ToString());
+                int pointNum = int.Parse(result.Tables[0].Rows[i][4].ToString());
 
-            LevelEnemyAmount levelEnemyAmount = levelEnemyAmountList.FirstOrDefault(obj => obj.level == level);
-            if(levelEnemyAmount == null)
-            {
-                levelEnemyAmount = new LevelEnemyAmount();
-                levelEnemyAmount.level = level;
-                levelEnemyAmount.enemySetoutList = new List<EnemySetoutTimer>();
-                levelEnemyAmountList.Add(levelEnemyAmount);
-            }
-            EnemySetoutTimer addEnemySetoutTimer = new EnemySetoutTimer();
-            addEnemySetoutTimer.setoutTimer = yanchiTime;
+                if (pointNum != p)
+                {
+                    continue;
+                }
 
-            ArmsSO arm = soldierListSO.soldierList.FirstOrDefault(obj => obj.nameString == name);
-            if(arm != null)
-            {
-                SoldierAmount soldierAmount = new SoldierAmount();
-                soldierAmount.soldier = arm;
-                soldierAmount.amount = num;
-                addEnemySetoutTimer.soldierAmount = soldierAmount;
-                levelEnemyAmount.enemySetoutList.Add(addEnemySetoutTimer);
+                LevelEnemyAmount levelEnemyAmount = levelEnemyAmountList.FirstOrDefault(obj => obj.level == level);
+                if (levelEnemyAmount == null)
+                {
+                    levelEnemyAmount = new LevelEnemyAmount();
+                    levelEnemyAmount.level = level;
+                    levelEnemyAmount.enemySetoutList = new List<EnemySetoutTimer>();
+                    levelEnemyAmountList.Add(levelEnemyAmount);
+                }
+                EnemySetoutTimer addEnemySetoutTimer = new EnemySetoutTimer();
+                addEnemySetoutTimer.setoutTimer = yanchiTime;
 
-                Debug.Log(level + "," + name + "," + num + "," + yanchiTime + "," + pointNum);
+                ArmsSO arm = soldierListSO.soldierList.FirstOrDefault(obj => obj.nameString == name);
+                if (arm != null)
+                {
+                    SoldierAmount soldierAmount = new SoldierAmount();
+                    soldierAmount.soldier = arm;
+                    soldierAmount.amount = num;
+                    addEnemySetoutTimer.soldierAmount = soldierAmount;
+                    levelEnemyAmount.enemySetoutList.Add(addEnemySetoutTimer);
+
+                    Debug.Log(level + "," + name + "," + num + "," + yanchiTime + "," + pointNum);
+                }
+
+                //for (int j = 0; j < columns; j++)
+                //{
+                //    Debug.LogError(result.Tables[0].Rows[i][j].ToString());
+                //}
             }
-            
-            //for (int j = 0; j < columns; j++)
-            //{
-            //    Debug.LogError(result.Tables[0].Rows[i][j].ToString());
-            //}
+            item.levelEnemyAmountList = levelEnemyAmountList;
+            p++;
         }
+        
     }
 
     private int[] GetCount(DataTable dt)

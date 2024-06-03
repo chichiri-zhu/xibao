@@ -18,9 +18,11 @@ public class UpgradeBase : MonoBehaviour
     public event EventHandler OnUpgradeDone;
 
     public BuildingBase building;
+    public Player player;
 
     public virtual void Start()
     {
+        player = GameManager.Instance.GetPlayer();
         building = transform.GetComponent<BuildingBase>();
         if(building != null)
         {
@@ -30,7 +32,7 @@ public class UpgradeBase : MonoBehaviour
 
     private float spacing = 1f; // 资源之间的间距
     private List<ExpendResource> expendResourceList;
-    private void InitExpendResource()
+    protected void InitExpendResource()
     {
         for (int i = 0; i < building.resourcesTransform.childCount; i++)
         {
@@ -86,10 +88,10 @@ public class UpgradeBase : MonoBehaviour
         return true;
     }
 
-    private Coroutine currentCoroutine;
+    //private Coroutine currentCoroutine;
     public void DoUpgrade()
     {
-        currentCoroutine = StartCoroutine(HandleUpgrade());
+        player.actionCoroutine = StartCoroutine(HandleUpgrade());
     }
 
     private float timer; //按空格时长
@@ -137,6 +139,7 @@ public class UpgradeBase : MonoBehaviour
         if (talentChosen == TalentChosenEnum.done)
         {
             HideResource();
+            player.actionCoroutine = null;
             UpgradeDone();
             OnUpgradeDone?.Invoke(this, EventArgs.Empty);
             Destroy(this);
@@ -174,10 +177,7 @@ public class UpgradeBase : MonoBehaviour
             return;
         }
         Debug.Log("cancel");
-        if (currentCoroutine != null)
-        {
-            StopCoroutine(currentCoroutine);
-        }
+        player.CancelAction();
 
         InitResources();
         if (paidGoldAmount > 0)

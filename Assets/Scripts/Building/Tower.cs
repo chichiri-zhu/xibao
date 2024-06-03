@@ -6,7 +6,7 @@ using UnityEngine;
 //箭楼
 public class Tower : BuildingBase
 {
-    [SerializeField] private Vector3 projectileSpawnPosition;
+    [SerializeField] private Transform projectileSpawnPosition;
     private float shootTimer;
     private float shootTimerMax;
 
@@ -15,6 +15,7 @@ public class Tower : BuildingBase
 
     private int damageAmount = 0;
     private UnitBase targetEnemy;
+    private Soldier mergeSoldier;
 
     public event EventHandler<DoHitArgs> OnHit;
 
@@ -105,9 +106,39 @@ public class Tower : BuildingBase
             shootTimer = shootTimerMax;
             if (targetEnemy != null)
             {
-                ArrowProjectile.Create(projectileSpawnPosition, targetEnemy, damageAmount, GetComponent<UnitBase>());
+                Arrow(targetEnemy);
                 OnHit?.Invoke(this, new DoHitArgs { targetUnit = targetEnemy });
             }
         }
+    }
+
+    public void Arrow(UnitBase unit)
+    {
+        ArrowProjectile.Create(projectileSpawnPosition.position, unit, damageAmount, GetComponent<UnitBase>());
+    }
+
+    public UnitBase GetTargetEnemy()
+    {
+        return targetEnemy;
+    }
+
+    public void SetMergeSoldier(Soldier soldier)
+    {
+        mergeSoldier = soldier;
+        Type mergeType = Type.GetType(soldier.GetArms().soldierMerge);
+        if (mergeType != null)
+        {
+            gameObject.AddComponent(mergeType);
+        }
+    }
+
+    public float GetHitRof()
+    {
+        return targetMaxRadius;
+    }
+
+    public Soldier GetMergeSoldier()
+    {
+        return mergeSoldier;
     }
 }

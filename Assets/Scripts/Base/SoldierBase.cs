@@ -189,9 +189,9 @@ public class SoldierBase : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
+    protected virtual void OnDestroy()
     {
-        SoldierManager.Instance.RemoveSoldier(this);
+        //SoldierManager.Instance.RemoveSoldier(this);
         if (animator != null)
         {
             if (soldierSource == SoldierSource.Owner)

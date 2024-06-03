@@ -53,7 +53,21 @@ public class TalentChooseUI : UIbase
 
     public override void HandleEsc()
     {
-        base.HandleEsc();
         cancelCB?.Invoke();
+        base.HandleEsc();
+    }
+
+    public override void Show()
+    {
+        InputManager.Instance.EscAction = null;
+        base.Show();
+    }
+
+    public override void Hide()
+    {
+        base.Hide();
+        successCB = null;
+        cancelCB = null;
+        InputManager.Instance.EscAction = GameManager.Instance.EscHandle;
     }
 }

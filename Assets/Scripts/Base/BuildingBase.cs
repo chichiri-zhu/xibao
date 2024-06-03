@@ -9,6 +9,7 @@ public class BuildingBase : MonoBehaviour
     protected AttributeSystem attributeSystem;
     protected HealthSystem healthSystem;
     [SerializeField] protected BuildingStatus buildingStatus = BuildingStatus.Default;
+    private Player player;
 
     private void Awake()
     {
@@ -33,7 +34,8 @@ public class BuildingBase : MonoBehaviour
 
     protected virtual void Start()
     {
-        if(healthSystem != null)
+        player = GameManager.Instance.GetPlayer();
+        if (healthSystem != null)
         {
             healthSystem.OnDied += HealthSystem_OnDied;
         }
@@ -73,21 +75,29 @@ public class BuildingBase : MonoBehaviour
         if (upgrade != null)
         {
             upgrade.HideResource();
-            InputManager.Instance.RemoveSpaceEventHandlers();
         }
     }
 
+    private bool isEnter = false;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && GameManager.Instance.GetGameStatus() == GameStatus.Prepare && player.actionCoroutine == null)
         {
+            isEnter = true;
             _OnPlayerEnter();
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (!isEnter)
+        {
+            return;
+        }
+
+        isEnter = false;
+        InputManager.Instance.AddToBattleEventHandler();
+        if (collision.gameObject.CompareTag("Player") && GameManager.Instance.GetGameStatus() == GameStatus.Prepare)
         {
             _OnPlayerExit();
         }

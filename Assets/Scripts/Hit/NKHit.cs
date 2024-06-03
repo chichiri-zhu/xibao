@@ -12,7 +12,7 @@ public class NKHit : CommonHit
         Collider2D[] collider2DArray = Physics2D.OverlapCircleAll(transform.position, 3 + attributeParam.Rof, layerMask);
         foreach (Collider2D collider in collider2DArray)
         {
-            if(collider.gameObject == unit.gameObject)
+            if(unit == null || collider.gameObject == unit.gameObject)
             {
                 continue;
             }

@@ -13,19 +13,28 @@ public class UIbase : MonoBehaviour, IShowUI
 
     public void Awake()
     {
-        myInput = new MyInput();
-        myInput.Enable();
-        myInput.Player.Esc.performed += ctx =>
-        {
-            Debug.Log("esc");
-            HandleEsc();
-        };
+        //myInput = new MyInput();
+        //myInput.Enable();
+        //myInput.Player.Esc.performed += ctx =>
+        //{
+        //    HandleEsc();
+        //};
 
-        Hide();
         OnAwake();
     }
 
     public virtual void OnAwake()
+    {
+
+    }
+
+    public void Start()
+    {
+        OnStart();
+        Hide();
+    }
+
+    public virtual void OnStart()
     {
 
     }

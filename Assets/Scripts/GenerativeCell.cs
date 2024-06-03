@@ -86,7 +86,7 @@ public class GenerativeCell : MonoBehaviour
         soldierList = new List<SoldierBase>();
     }
 
-    private void CreateSoldier(Vector2 pos)
+    private SoldierBase CreateSoldier(Vector2 pos)
     {
         Transform newSoldier = SoldierManager.Instance.AddSoldier(generativeCellType, pos);
         SoldierBase soldier = newSoldier.GetComponent<SoldierBase>();
@@ -95,19 +95,40 @@ public class GenerativeCell : MonoBehaviour
             soldierList.Add(soldier);
             OnSoldierCreate?.Invoke(this, new OnSoldierCreateArgs { soldierBase = soldier });
         }
+
+        return soldier;
     }
 
     private void HandleCreate()
     {
-        int soldierListAmount = soldierList.FindAll(obj => obj != null).Count;
-        int amountDiff = soldierAmount - soldierListAmount;
-        if(amountDiff > 0)
+        //int soldierListAmount = soldierList.FindAll(obj => obj != null).Count;
+        //int amountDiff = soldierAmount - soldierListAmount;
+        //if(amountDiff > 0)
+        //{
+        //    Debug.Log(createTimer);
+        //    if(createTimer > createTimerMax)
+        //    {
+        //        createTimer = 0;
+        //        CreateSoldier(createTransform.position);
+        //    }
+        //    else
+        //    {
+        //        createTimer += Time.deltaTime;
+        //    }
+        //}
+        //////////////////////////////////////////////////////////////////////
+
+        List<SoldierBase> diedList = soldierList.FindAll(obj => obj != null && obj.GetSoldierStatus() == SoldierStatus.Death);
+        //if(diedAmount)
+        if(diedList.Count > 0)
         {
-            Debug.Log(createTimer);
-            if(createTimer > createTimerMax)
+            if (createTimer > createTimerMax)
             {
                 createTimer = 0;
-                CreateSoldier(createTransform.position);
+                Soldier reviveSoldier = diedList.FirstOrDefault() as Soldier;
+                reviveSoldier.Revive();
+                reviveSoldier.transform.position = createTransform.position;
+                reviveSoldier.navMeshAgent.SetDestination(reviveSoldier.GetPatrolPosition());
             }
             else
             {

@@ -22,16 +22,17 @@ public class TalentChooseItem : MonoBehaviour
 
     public event EventHandler<OnTalentChooseArgs> OnChoose;
 
-    private void Awake()
-    {
-        button.onClick.AddListener(() => {
-            Choose();
-        });
-    }
+    //private void Awake()
+    //{
+    //    button.onClick.AddListener(() => {
+    //        Choose();
+    //    });
+    //}
 
     public void SetTalent(TalentSO talent)
     {
         this.talent = talent;
+        Debug.Log(talent.nameString);
         title.SetText(talent.nameString);
     }
 

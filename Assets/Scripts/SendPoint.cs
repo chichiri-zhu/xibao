@@ -5,9 +5,12 @@ using System.Linq;
 
 public class SendPoint : MonoBehaviour
 {
-    [SerializeField] private List<LevelEnemyAmount> levelEnemyAmountList;
+    public List<LevelEnemyAmount> levelEnemyAmountList;
     private List<Transform> enemyList;
-    private bool isEnemyInitFinish;
+    public bool isEnemyInitFinish;
+    public bool isClear;
+    public bool isBattle;
+    [SerializeField] private Transform tipListTransform;
 
     private List<EnemySetoutTimer> currentEnemySetoutList;
 
@@ -16,23 +19,81 @@ public class SendPoint : MonoBehaviour
         InitSendEnemyData();
         GameManager.Instance.OnBattleStart += Instance_OnBattleStart;
         GameManager.Instance.OnBattleEnd += Instance_OnBattleEnd;
+        GameManager.Instance.OnPrepareStart += Instance_OnPrepareStart;
+    }
+
+    private void Instance_OnPrepareStart(object sender, System.EventArgs e)
+    {
+        InitSendEnemyData();
+    }
+
+    private void Update()
+    {
+        if (isBattle && isEnemyInitFinish)
+        {
+            isClear = enemyList.FindAll(obj => obj != null).Count() <= 0;
+        }
     }
 
     private void Instance_OnBattleStart(object sender, System.EventArgs e)
     {
+        isClear = false;
+        isEnemyInitFinish = false;
+        isBattle = true;
         InitEnemys();
     }
 
     private void Instance_OnBattleEnd(object sender, System.EventArgs e)
     {
         ClearEnemys();
+        isBattle = false;
     }
 
     private void InitSendEnemyData()
     {
         int level = LevelManager.Instance.GetLevel();
+        Debug.Log(level);
         LevelEnemyAmount levelEnemyAmount = levelEnemyAmountList.FirstOrDefault(obj => obj.level == level);
-        currentEnemySetoutList = levelEnemyAmount.enemySetoutList;
+        if(levelEnemyAmount != null)
+        {
+            currentEnemySetoutList = levelEnemyAmount.enemySetoutList;
+        }
+        else
+        {
+            currentEnemySetoutList = new List<EnemySetoutTimer>();
+        }
+
+        for (int i = 0; i < tipListTransform.childCount; i++)
+        {
+            Destroy(tipListTransform.GetChild(i).gameObject);
+        }
+
+        Dictionary<ArmsSO, int> armsAmountDic = new Dictionary<ArmsSO, int>();
+        foreach (EnemySetoutTimer item in currentEnemySetoutList)
+        {
+            SoldierAmount soldierAmount = item.soldierAmount;
+            if (armsAmountDic.ContainsKey(soldierAmount.soldier))
+            {
+                armsAmountDic[soldierAmount.soldier] += soldierAmount.amount;
+            }
+            else
+            {
+                armsAmountDic.Add(soldierAmount.soldier, soldierAmount.amount);
+            }
+        }
+
+        if(armsAmountDic.Count > 0)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+            foreach (var item in armsAmountDic)
+            {
+                SendPointTipItem.Create(item.Key, item.Value, tipListTransform);
+            }
+        }
+        else
+        {
+            transform.localScale = new Vector3(0, 0, 0);
+        }
     }
 
     private List<Coroutine> enemySetoutCoroutines = new List<Coroutine>();

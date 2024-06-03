@@ -30,4 +30,10 @@ public class HeartBuilding : BuildingBase
     {
         InitUpgrade();
     }
+
+    public override void Died()
+    {
+        base.Died();
+        GameManager.Instance.GameOver();
+    }
 }

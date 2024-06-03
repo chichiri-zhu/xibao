@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4531935292038971434}
-  m_Layer: 10
+  m_Layer: 23
   m_Name: Resources
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 8638064986244383478}
   - component: {fileID: 5605441549223099203}
   - component: {fileID: 1812968771751846689}
-  m_Layer: 10
+  m_Layer: 23
   m_Name: pfPlace
   m_TagString: Place
   m_Icon: {fileID: 0}
@@ -105,8 +105,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1152558627
-  m_SortingLayer: 1
+  m_SortingLayerID: 2024883713
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b950d2af67b31400e80ab677eb29c59c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -190,7 +190,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2553370574779162586}
   - component: {fileID: 8105799059260075403}
-  m_Layer: 10
+  m_Layer: 23
   m_Name: BuildingView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -252,7 +252,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1152558627
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d3a3c7611b774411f8e5e4d9b03c65ba, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -275,7 +275,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3124661507438392351}
   - component: {fileID: 3887884349257549209}
-  m_Layer: 0
+  m_Layer: 23
   m_Name: sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -335,9 +335,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1152558627
-  m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingLayerID: 2024883713
+  m_SortingLayer: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 92f7f83b952784cde8ef0fa3451e7594, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

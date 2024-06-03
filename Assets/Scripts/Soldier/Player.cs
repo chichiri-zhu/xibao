@@ -10,6 +10,7 @@ public class Player : SoldierBase
     public PlayerController playerController;
     private Rigidbody2D rigidbody2d;
     public Vector3 movePositionDir;
+    public Coroutine actionCoroutine;
 
     private bool isBuilding = false;
     private BuildingPlace currentBuildingPlace;
@@ -111,11 +112,12 @@ public class Player : SoldierBase
     {
         if(moveInput == Vector2.zero)
         {
+            SetIdle();
             isMoving = false;
         }
         else
         {
-            //SetWalk();
+            SetWalk();
             isMoving = true;
             movePositionDir = moveInput;
             //Debug.Log(moveInput);
@@ -146,17 +148,19 @@ public class Player : SoldierBase
 
     public void Turn(float direction)
     {
-        transform.localScale = new Vector3(Mathf.Sign(direction), 1, 1);
+        transform.localScale = new Vector3(Mathf.Sign(direction) * -1, 1, 1);
     }
 
     public override void SetIdle()
     {
-        animator.SetInteger("State", 0);
+        animator.SetBool("Walk", false);
+        //animator.SetInteger("State", 0);
     }
 
     public override void SetWalk()
     {
-        animator.SetInteger("State", 1);
+        animator.SetBool("Walk", true);
+        //animator.SetInteger("State", 1);
     }
 
     public override void SetHit()
@@ -221,6 +225,16 @@ public class Player : SoldierBase
     public float GetReviveNormalized()
     {
         return reviveTime / reviveTimeMax;
+    }
+
+    public void CancelAction()
+    {
+        if (actionCoroutine != null)
+        {
+            //StopAllCoroutines();
+            StopCoroutine(actionCoroutine);
+        }
+        actionCoroutine = null;
     }
 
     private void OnDestroy()

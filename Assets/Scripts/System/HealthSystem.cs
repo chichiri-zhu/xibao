@@ -72,7 +72,7 @@ public class HealthSystem : MonoBehaviour
 
         OnDamaged?.Invoke(this, new OnDamagedArgs { damageAmount = damageAmount, damageRes = damageRes, sourceUnit = sourceUnit });
 
-        _VerifyDead(sourceUnit);
+        _VerifyDead();
     }
 
     public void HpRecover(int amount, bool isPoint = true)
@@ -137,7 +137,7 @@ public class HealthSystem : MonoBehaviour
         healthAmount = Mathf.Clamp(healthAmount, 0, healthAmountMax);
     }
 
-    private void _VerifyDead(UnitBase sourceUnit = null)
+    private void _VerifyDead()
     {
         if (IsDead())
         {

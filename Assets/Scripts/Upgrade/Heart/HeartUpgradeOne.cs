@@ -6,7 +6,7 @@ public class HeartUpgradeOne : UpgradeBase
 {
     private void Awake()
     {
-        upgradeAmount = 7;
+        upgradeAmount = 4;
     }
 
     //public override void HandleUpgrade()
@@ -35,8 +35,9 @@ public class HeartUpgradeOne : UpgradeBase
     
     public override IEnumerator _DoUpgrade()
     {
-        HeartBuilding heartBuilding = building as HeartBuilding;
-        List<TalentSO> upgradeTalentList = heartBuilding.upgradeTalentList;
+        //HeartBuilding heartBuilding = building as HeartBuilding;
+        //List<TalentSO> upgradeTalentList = heartBuilding.upgradeTalentList;
+        List<TalentSO> upgradeTalentList = ConfigManager.Instance.gameConfig.heartUpgradeTalentLevel1;
         yield return null;
         if (upgradeTalentList != null && upgradeTalentList.Count > 0)
         {
@@ -45,7 +46,6 @@ public class HeartUpgradeOne : UpgradeBase
         }
         
         yield return null;
-        //talentChosen == 1 ? true : false;
     }
     
     private IEnumerator ShowTalentChooseUI(List<TalentSO> talentList)
@@ -54,7 +54,7 @@ public class HeartUpgradeOne : UpgradeBase
 
         TalentChooseUI.Instance.Show(talentList, (TalentSO talent) =>
         {
-            talentList.Remove(talent);
+            //talentList.Remove(talent);
             talentChosen = TalentChosenEnum.done;
         }, () =>
         {
@@ -62,12 +62,5 @@ public class HeartUpgradeOne : UpgradeBase
         });
 
         yield return null;
-        //Debug.Log(talentChosen);
-        //while (talentChosen == 0)
-        //{
-        //    yield return null;
-        //}
-        //Debug.Log(talentChosen == 1);
-        //yield return talentChosen == 1 ? true : false;
     }
 }
