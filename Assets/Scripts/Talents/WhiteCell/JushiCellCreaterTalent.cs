@@ -19,7 +19,7 @@ public class JushiCellCreaterTalent : TalentBase
         {
             generativeCell.enabled = true;
         }
-        ArmsSO arms = AssetManager.Instance.soldierListSO.soldierList.FirstOrDefault(obj => obj.name == "Dan-Cell");
+        ArmsSO arms = AssetManager.Instance.soldierListSO.soldierList.FirstOrDefault(obj => obj.name == "Ju-Cell");
         generativeCell.InitCell(arms, 4);
         //添加升级组件
 
