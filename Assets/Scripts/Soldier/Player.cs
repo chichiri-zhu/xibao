@@ -41,6 +41,13 @@ public class Player : SoldierBase
     public override void OnStart()
     {
         healthSystem.OnDied += HealthSystem_OnDied;
+        GameManager.Instance.OnBattleEnd += Instance_OnBattleEnd;
+    }
+
+    private void Instance_OnBattleEnd(object sender, EventArgs e)
+    {
+        CancelAction();
+        Revive();
     }
 
     private void HealthSystem_OnDied(object sender, EventArgs e)
@@ -50,62 +57,12 @@ public class Player : SoldierBase
 
     public BuildingPlace GetOverBuildingPlace()
     {
-        //RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, LayerMask.GetMask("Place"));
-
-        //if(hit.collider != null)
-        //{
-        //    return hit.collider.GetComponent<BuildingPlace>();
-        //}
-        //else
-        //{
-        //    return null;
-        //}
         return triggerPlace;
     }
 
     public BuildingBase GetOverBuilding()
     {
-        //RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, LayerMask.GetMask("Building"));
-
-        //if (hit.collider != null)
-        //{
-        //    return hit.collider.GetComponent<BuildingBase>();
-        //}
-        //else
-        //{
-        //    return null;
-        //}
         return triggerBuilding;
-    }
-
-    private BuildingBase triggerBuilding;
-    private BuildingPlace triggerPlace;
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Building"))
-        {
-            triggerBuilding = collision.GetComponent<BuildingBase>();
-        }else if (collision.gameObject.CompareTag("Place"))
-        {
-            triggerPlace = collision.GetComponent<BuildingPlace>();
-        }
-    }
-
-    public void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Building"))
-        {
-            triggerBuilding = null;
-        }
-        else if (collision.gameObject.CompareTag("Place"))
-        {
-            triggerPlace = null;
-        }
-    }
-
-    public bool IsOverPlace()
-    {
-        return GetOverBuildingPlace() != null;
     }
 
     public void SetMoveDir(Vector2 moveInput)
@@ -210,13 +167,11 @@ public class Player : SoldierBase
 
     public void Death()
     {
-        Debug.Log("Death");
         soldierStatus = SoldierStatus.Death;
     }
 
     public void Revive()
     {
-        Debug.Log("Revive");
         soldierStatus = SoldierStatus.Default;
         healthSystem.Revive();
         reviveTime = reviveTimeMax;
@@ -237,7 +192,38 @@ public class Player : SoldierBase
         actionCoroutine = null;
     }
 
-    private void OnDestroy()
+    private BuildingBase triggerBuilding;
+    private BuildingPlace triggerPlace;
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Building"))
+        {
+            triggerBuilding = collision.GetComponent<BuildingBase>();
+        }
+        else if (collision.gameObject.CompareTag("Place"))
+        {
+            triggerPlace = collision.GetComponent<BuildingPlace>();
+        }
+    }
+
+    public void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Building"))
+        {
+            triggerBuilding = null;
+        }
+        else if (collision.gameObject.CompareTag("Place"))
+        {
+            triggerPlace = null;
+        }
+    }
+
+    public bool IsOverPlace()
+    {
+        return GetOverBuildingPlace() != null;
+    }
+
+    protected override void OnDestroy()
     {
         healthSystem.OnDied -= HealthSystem_OnDied;
     }

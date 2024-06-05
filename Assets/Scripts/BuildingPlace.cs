@@ -186,8 +186,11 @@ public class BuildingPlace : MonoBehaviour
     private bool isEnter = false;
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("place");
+        Debug.Log(player.actionCoroutine);
         if (collision.gameObject.CompareTag("Player") && GameManager.Instance.GetGameStatus() == GameStatus.Prepare && player.actionCoroutine == null)
         {
+            Debug.Log("enter");
             isEnter = true;
             _OnPlayerEnter();
         }

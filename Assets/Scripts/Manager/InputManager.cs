@@ -37,7 +37,6 @@ public class InputManager : SingleBase<InputManager>
         bool isOtherUIOpen = false;
         foreach (UIbase ui in openUIs)
         {
-            Debug.Log(ui);
             //判断是否是暂停界面
             if (ui.gameObject == CanvasManager.Instance.pauseUI.gameObject)
             {
@@ -152,5 +151,12 @@ public class InputManager : SingleBase<InputManager>
         myInput.Player.Building.canceled -= Upgrade_canceled;
         myInput.Player.Building.started -= ToBattle_started;
         myInput.Player.Building.canceled -= ToBattle_canceled;
+    }
+
+    private void OnDestroy()
+    {
+        RemoveSpaceEventHandlers();
+        myInput.Player.Esc.performed -= Esc_performed;
+        myInput.Player.Merge.performed -= Merge_performed;
     }
 }
